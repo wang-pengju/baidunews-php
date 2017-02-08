@@ -48,7 +48,6 @@ $(document).ready(function(){
             	datatype:'json',
             	success:function(data){
 				    refreshNews();
-                    alert($("#newstime").val());
                     $("#newstitle").val('');
                     $("#newsimg").val('');
                     $("#newssrc").val('');
