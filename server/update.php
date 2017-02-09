@@ -3,12 +3,15 @@ header("Content-type:application/json;charset=utf-8");
 require_once('db.php');
 
 if($link){
-	$newsid=htmlspecialchars($_POST['id']);
-	$newstitle=htmlspecialchars($_POST['newstitle']);
-    $newstype=htmlspecialchars($_POST['newstype']);
-    $newsimg=htmlspecialchars($_POST['newsimg']);
-    $newssrc=htmlspecialchars($_POST['newssrc']);
-    $newstime=htmlspecialchars($_POST['newstime']);
+    foreach ($_POST as $key => $value) {
+        $_POST[$key]=addslashes(htmlspecialchars($value));
+    }
+	$newsid=$_POST['id'];
+	$newstitle=$_POST['newstitle'];
+    $newstype=$_POST['newstype'];
+    $newsimg=$_POST['newsimg'];
+    $newssrc=$_POST['newssrc'];
+    $newstime=$_POST['newstime'];
 	
 
 	$sql="UPDATE `news` SET `newstitle`='{$newstitle}',`newstype`='{$newstype}',`newsimg`='{$newsimg}',`newssrc`='{$newssrc}',`newstime`='{$newstime}' WHERE `id`={$newsid}";
@@ -18,6 +21,6 @@ if($link){
     echo json_encode(array('success'=>$sql));	
 }
 
-mysqli_close();
+mysqli_close($link);
 
 ?>
